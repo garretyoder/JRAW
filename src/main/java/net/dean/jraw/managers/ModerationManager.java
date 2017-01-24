@@ -64,6 +64,27 @@ public class ModerationManager extends AbstractManager {
             throws NetworkException, ApiException {
         delete(thing.getFullName());
     }
+    
+    /**
+     * Mutes a user from the specified subreddit
+     *
+     * @param name   The user to mute
+     * @param subreddit   The subreddit to mute from
+     * @throws NetworkException If the request was not successful
+     * @throws ApiException     If the API returned an error
+     */
+    @EndpointImplementation(Endpoints.OAUTH_ME_FRIENDS_USERNAME_PUT)
+    public void muteUser(String subreddit, String name) throws NetworkException, ApiException {
+        Map<String, String> args = JrawUtils.mapOf(
+                "name", name,
+                "type", "muted"
+        );
+
+        genericPost(reddit.request()
+                .path("/r/" + subreddit + "/api/friend")
+                .post(args)
+                .build());
+    }
 
     /**
      * Bans a user for a set amount of days with a reason, message, and ability to PM the user
