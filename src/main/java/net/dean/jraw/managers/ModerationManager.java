@@ -32,6 +32,76 @@ public class ModerationManager extends AbstractManager {
     public ModerationManager(RedditClient reddit) {
         super(reddit);
     }
+    
+    @EndpointImplementation(Endpoints.SITE_ADMIN)
+    public void editSidebar(
+            String fullname,
+            boolean allow_images,
+            boolean allow_top,
+            boolean collapse_deleted_comments,
+            int comment_score_hide_mins,
+            String description,
+            boolean exclude_banned_modqueue,
+            boolean hide_ads,
+            String lang,
+            String link_type,
+            String name,
+            boolean over_18,
+            String public_description,
+            boolean public_traffic,
+            boolean show_media,
+            boolean show_media_preview,
+            String spam_comments,
+            String spam_links,
+            String spam_selfposts,
+            boolean spoilers_enabled,
+            String submit_link_label,
+            String submit_text,
+            String submit_text_label,
+            String suggested_comment_sort,
+            String title,
+            String type,
+            int wiki_edit_age,
+            int wiki_edit_karma,
+            String wikimode) throws NetworkException, ApiException {
+
+        Map<String, String> args = JrawUtils.mapOf(
+                "allow_images", allow_images,
+                "allow_top", allow_top,
+                "collapse_deleted_comments", collapse_deleted_comments,
+                "comment_score_hide_mins", comment_score_hide_mins,
+                "description", description,
+                "exclude_banned_modqueue", exclude_banned_modqueue,
+                "hide_ads", hide_ads,
+                "lang", lang,
+                "link_type", link_type,
+                "name", name,
+                "over_18", over_18,
+                "public_description", public_description,
+                "public_traffic", public_traffic,
+                "show_media", show_media,
+                "show_media_preview", show_media_preview,
+                "spam_comments", spam_comments,
+                "spam_links", spam_links,
+                "spam_selfposts", spam_selfposts,
+                "spoilers_enabled", spoilers_enabled,
+                "submit_link_label", submit_link_label,
+                "submit_text", submit_text,
+                "submit_text_label", submit_text_label,
+                "suggested_comment_sort", suggested_comment_sort,
+                "title", title,
+                "type", type,
+                "wiki_edit_age", wiki_edit_age,
+                "wiki_edit_karma", wiki_edit_karma,
+                "wikimode", wikimode,
+                "sr", fullname
+        );
+
+        genericPost(reddit.request()
+                .path("/api/site_admin")
+                .post(args)
+                .build());
+    }
 
     /**
      * Sets whether or not this submission should be marked as not safe for work
