@@ -33,14 +33,6 @@ public class ModerationManager extends AbstractManager {
         super(reddit);
     }
     
-    @EndpointImplementation(Endpoints.SUBREDDIT_ABOUT_EDIT)
-    public String getSubredditConfig(String subreddit) {
-        System.out.println(reddit.request().path(subreddit).build().getUrl());
-        return reddit.execute(reddit.request()
-                .path(subreddit)
-                .build()).getRaw();
-    }
-    
     @EndpointImplementation(Endpoints.SITE_ADMIN)
     public void editSidebar(
             String fullname,
