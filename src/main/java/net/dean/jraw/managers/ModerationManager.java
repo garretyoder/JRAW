@@ -33,7 +33,7 @@ public class ModerationManager extends AbstractManager {
         super(reddit);
     }
     
-    @EndpointImplementation(Endpoints.SITE_ADMIN)
+    @EndpointImplementation(Endpoints.SUBREDDIT_ABOUT_EDIT)
     public String getSubredditConfig(String subreddit) {
         return reddit.execute(reddit.request()
             .path("/r/" + subreddit + "/about/edit.json")
