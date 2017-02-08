@@ -71,6 +71,21 @@ public class WikiManager extends AbstractManager {
     public WikiPage get(String page) throws NetworkException {
         return get(null, page);
     }
+    
+    @EndpointImplementation(Endpoints.WIKI_EDIT)
+    public void edit(String subreddit, String page, String content, String reason) throws NetworkException {
+        Map<String, String> args = JrawUtils.mapOf(
+                "content", content,
+                "reason", reason,
+                "page", page
+        );
+
+        reddit.execute(reddit.request()
+                .path("/r/" + subreddit + "/api/wiki/edit")
+                .post(args)
+                .build()
+        );
+    }
 
     /**
      * Gets a WikiPage for a certain subreddit
