@@ -34,6 +34,13 @@ public class ModerationManager extends AbstractManager {
     }
     
     @EndpointImplementation(Endpoints.SITE_ADMIN)
+    public String getSubredditConfig(String subreddit) {
+        return reddit.execute(reddit.request()
+            .path("/r/" + subreddit + "/about/edit.json")
+            .build()).getRaw();
+    }
+    
+    @EndpointImplementation(Endpoints.SITE_ADMIN)
     public void editSidebar(
             String fullname,
             boolean allow_images,
