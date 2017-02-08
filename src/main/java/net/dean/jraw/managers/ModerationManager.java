@@ -35,9 +35,11 @@ public class ModerationManager extends AbstractManager {
     
     @EndpointImplementation(Endpoints.SUBREDDIT_ABOUT_EDIT)
     public String getSubredditConfig(String subreddit) {
-        return reddit.execute(reddit.request()
-            .path("/r/" + subreddit + "/about/edit.json")
-            .build()).getRaw();
+        HttpRequest request = reddit.request()
+                .path(".json")
+                .build();
+        System.out.println(request.getUrl());
+        return reddit.execute(request).getRaw();
     }
     
     @EndpointImplementation(Endpoints.SITE_ADMIN)
