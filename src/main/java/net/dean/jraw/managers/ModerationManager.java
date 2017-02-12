@@ -375,6 +375,18 @@ public class ModerationManager extends AbstractManager {
 
                 )).build());
     }
+    
+    @EndpointImplementation(Endpoints.FLAIR)
+    public void setDistinguishedStatus(Submission s, String flair, String css) throws NetworkException, ApiException {
+        genericPost(reddit.request()
+                .endpoint(Endpoints.FLAIR)
+                .post(JrawUtils.mapOf(
+                        "link", s.getFullName(),
+                        "api_type", "json",
+                        "css_class", css,
+                        "text", flair 
+                )).build());
+    }
 
     /**
      * Sets the flair for the currently authenticated user
