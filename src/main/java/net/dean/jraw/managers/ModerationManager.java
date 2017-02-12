@@ -377,7 +377,7 @@ public class ModerationManager extends AbstractManager {
     }
     
     @EndpointImplementation(Endpoints.FLAIR)
-    public void setDistinguishedStatus(Submission s, String flair, String css) throws NetworkException, ApiException {
+    public void setFlairByClass(Submission s, String flair, String css) throws NetworkException, ApiException {
         genericPost(reddit.request()
                 .endpoint(Endpoints.FLAIR)
                 .post(JrawUtils.mapOf(
